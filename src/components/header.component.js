@@ -14,7 +14,6 @@ export class HeaderComponent extends Component{
 }
 
 function headerStarted(){
-  
   localStorage.setItem('user', JSON.stringify(true))
   this.hide();
 }
