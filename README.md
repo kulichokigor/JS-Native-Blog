@@ -1,1 +1,0 @@
-JavaScript Native (Educational Project)

@@ -1,5 +1,4 @@
-import {Component} from '../core/component'
-
+import {Component} from '../core/component';
 
 export class HeaderComponent extends Component{
   constructor(id){
@@ -9,11 +8,12 @@ export class HeaderComponent extends Component{
     if(localStorage.getItem('user')){
       this.hide()
     }
-    document.querySelector('.js-header-start').addEventListener('click', headerStarted.bind(this))
+    const btn = this.$el.querySelector('.js-header-start');
+    btn.addEventListener('click', heandlerButton.bind(this))
   }
 }
 
-function headerStarted(){
-  localStorage.setItem('user', JSON.stringify(true))
-  this.hide();
+function heandlerButton(){
+  localStorage.setItem('user', JSON.stringify('true'));
+  this.hide()
 }
