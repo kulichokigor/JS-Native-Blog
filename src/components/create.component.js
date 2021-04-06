@@ -13,7 +13,7 @@ export class CreateComponent extends Component{
 }
 
 function submitHeandler(event){
-  event.preventDefault()
+  event.preventDefault();
  
   this.form = new Form(this.$el,{
     'title':[Validators.required],
@@ -25,7 +25,7 @@ function submitHeandler(event){
       ...this.form.value()
     }
     console.log(formData)
-  }else{
-    console.warn("This form inValid")
+
+    this.form.clearValueForm()
   }
 }

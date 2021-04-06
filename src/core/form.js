@@ -12,6 +12,11 @@ export class Form {
 
     return value
   }
+  clearValueForm(){
+    Object.keys(this.controls).forEach(control=>{
+      this.form[control].value = ''
+    })
+  }
 
   isValid(){
     let isFormValid = true;
@@ -22,9 +27,27 @@ export class Form {
       validators.forEach(validator=>{
         isValid = validator(this.form[control].value) && isValid
       })
+
+      isValid ? clearError(this.form[control]) : setError(this.form[control])
+
       isFormValid = isValid && isFormValid
     })
 
     return isFormValid;
+  }
+}
+
+function setError($control){
+  clearError($control)
+  const error = `<p class="validation-error" id="error">Не коректное значение. ${$control.placeholder}</p>`;
+
+  $control.classList.add('invalid');
+  $control.insertAdjacentHTML('afterend', error)
+}
+
+function clearError($control){
+  $control.classList.remove('invalid');
+  if($control.nextSibling){
+    $control.closest('.form-control').removeChild($control.nextSibling)
   }
 }
