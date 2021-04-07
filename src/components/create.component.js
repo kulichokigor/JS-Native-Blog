@@ -1,6 +1,7 @@
 import { Component } from "../core/component";
 import { Form } from "../core/form";
 import { Validators } from "../core/validators";
+import { apiService } from "../services/api.services"
 
 
 export class CreateComponent extends Component{
@@ -12,7 +13,7 @@ export class CreateComponent extends Component{
   }
 }
 
-function submitHeandler(event){
+async function submitHeandler(event){
   event.preventDefault();
  
   this.form = new Form(this.$el,{
@@ -24,8 +25,9 @@ function submitHeandler(event){
       type: this.$el.type.value,
       ...this.form.value()
     }
-    console.log(formData)
 
+    await apiService.createPost(formData)
     this.form.clearValueForm()
+    alert('Данные отправлены на сервер')
   }
 }
