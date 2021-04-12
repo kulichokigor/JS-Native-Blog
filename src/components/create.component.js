@@ -22,6 +22,7 @@ async function submitHeandler(event){
   })
   if(this.form.isValid()){
     const formData = {
+      date:new Date().toLocaleDateString(),
       type: this.$el.type.value,
       ...this.form.value()
     }
