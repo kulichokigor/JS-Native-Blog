@@ -1,8 +1,43 @@
 import { Component } from "../core/component";
+import { apiService } from "../services/api.services"
 
 
 export class FavoriteComponent extends Component{
-  constructor(id){
-    super(id)
+  constructor(id,options){
+    super(id);
+    this.loader = options.loader
+  }
+  init(){
+    this.$el.addEventListener('click', linkClickHeandler.bind(this))
+  }
+  onShow(){
+
+    const favorites = JSON.parse(localStorage.getItem('favorite'));
+    const html = renderList(favorites);
+    this.loader.show();
+    this.$el.insertAdjacentHTML('afterbegin', html);
+    this.loader.hide()
+  }
+  onHide(){
+    this.$el.innerHTML = ''
+  }
+}
+
+function renderList(list=[]){
+  if(list.length){     //перевырка чи масив не порожній
+    return `
+      <ul>
+        ${list.map(i=>`<li><a href="#" class="js-linkid">${i}</a></li>`).join('')}
+      </ul>
+    `
+  }
+  return '<div class="center text-warn">Вы пока ничего не добавили</div>'
+}
+
+async function linkClickHeandler(event){
+  event.preventDefault()
+  if(event.target.classList.contains('js-linkid')){
+    const post = await apiService.getPostId(event.target.textContent); //15.04.2021 20:47
+    console.log(post)
   }
 }

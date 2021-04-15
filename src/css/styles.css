@@ -59,3 +59,10 @@ textarea {
 .multi-line {
   white-space: pre-line;
 }
+.center{
+  text-align: center;
+}
+.text-warn{
+  color: #db5a04;
+  font-size: 15px;
+}
