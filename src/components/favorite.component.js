@@ -1,5 +1,6 @@
 import { Component } from "../core/component";
-import { apiService } from "../services/api.services"
+import { apiService } from "../services/api.services";
+import { renderPosts } from "../templates/post.templates"
 
 
 export class FavoriteComponent extends Component{
@@ -37,7 +38,10 @@ function renderList(list=[]){
 async function linkClickHeandler(event){
   event.preventDefault()
   if(event.target.classList.contains('js-linkid')){
+    this.loader.show()
     const post = await apiService.getPostId(event.target.textContent); //15.04.2021 20:47
-    console.log(post)
+    this.$el.innerHTML = '';
+    this.$el.insertAdjacentHTML('afterbegin', renderPosts(post, {withButton:false}));
+    this.loader.hide();
   }
 }
