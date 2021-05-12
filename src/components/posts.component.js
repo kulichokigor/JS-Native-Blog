@@ -13,6 +13,7 @@ export class PostsComponent extends Component{
     this.loader.show();
     const fbData = await apiService.getPost();
     const posts = TransformService.fbObjecttoArray(fbData);
+    console.log(posts)
     //відрисовка DOM post
     this.loader.hide();
     const html = posts.map(post=>renderPosts(post,{withButton:true}));

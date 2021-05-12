@@ -25,7 +25,7 @@ export class FavoriteComponent extends Component{
 }
 
 function renderList(list=[]){
-  if(list.length){     //перевырка чи масив не порожній
+  if(list && list.length){     //перевірка чи масив не порожній
     return `
       <ul>
         ${list.map(i=>`<li><a href="#" class="js-linkid">${i}</a></li>`).join('')}
